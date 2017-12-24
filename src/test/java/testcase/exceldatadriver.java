@@ -1,4 +1,5 @@
-import java.sql.*;
+package testcase;
+
 import java.io.File;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -22,8 +23,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 
-public class mysqldatadriver {
-    public WebDriver driver;
+public class exceldatadriver {
+    WebDriver driver;
     String url="http://www.sogou.com/";
     @BeforeMethod
     public void before(){
@@ -36,7 +37,8 @@ public class mysqldatadriver {
     }
     @DataProvider(name = "testdata")
     public static Object[][]testdata()throws IOException{
-        return gettestdata("testdata");
+        //return gettestdata("//Users//yu//Documents//maven01","xlsxtestdata.xlsx","工作表1");
+        return gettestdata("../../../../src/test/testdata","xlsxtestdata.xlsx","工作表1");
     }
     @Test(dataProvider = "testdata")
     public void test(String keyword1,String keyword2,String result){
@@ -53,53 +55,39 @@ public class mysqldatadriver {
         Assert.assertTrue(driver.getPageSource().contains(result));
     }
     //read csv file as testdata
-    public static Object[][]gettestdata(String tablename)throws IOException{
-        //download database driver .jar or add dependence
-        String database="com.mysql.jdbc.driver";
-        String SID="jdbc:mysql://127.0.0.1:3306/gloryroad";
-        String user="root";
-        String password="gloryroad";
-        List<Object[]>records=new ArrayList<Object[]>();
-        try {
-            //set driver
-            Class.forName(database);
-            Connection conn=DriverManager.getConnection(SID,user,password);
-            if (!conn.isClosed()){
-                System.out.println("connect successed!");
-                //create statement
-                Statement statement=conn.createStatement();
-                String sql="select * from " + tablename;
-                ResultSet rs=statement.executeQuery(sql);
-                ResultSetMetaData remetadata=rs.getMetaData();
-                int cols=remetadata.getColumnCount();
-                while (rs.next()){
-                    String fields[]=new String[cols];
-                    int col=0;
-                    for (int colidx=0;colidx<cols;colidx++){
-                        fields[col]=rs.getString(colidx+1);
-                        col++;
-                    }
-                    records.add(fields);
-                    System.out.println(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3));
-                }
-                rs.close();
-                conn.close();
-            }
-        }catch (ClassNotFoundException e){
-            System.out.println("can't find database driver class!");
-            e.getStackTrace();
-        }catch (SQLException e){
-            e.getStackTrace();
-        }catch (Exception e){
-            e.printStackTrace();
+    public static Object[][]gettestdata(String filepath,String filename,String sheetname)throws IOException{
+        File file=new File(filepath+"//"+filename);
+        FileInputStream inputStream=new FileInputStream(file);
+        Workbook workbook=null;
+        //check file is .xlsx or .xls
+        String fileextname=filename.substring(filename.indexOf("."));
+        //if file is .xlsx,use XSSFWORKBOOK as instancs
+        //if file is .xls.use HSSFWORKBOOK as instance
+        if (fileextname.equals(".xlsx")){
+            workbook =new XSSFWorkbook(inputStream);
         }
+        else if (fileextname.equals(".xls")){
+            workbook=new HSSFWorkbook(inputStream);
+        }
+        Sheet sheet= workbook.getSheet(sheetname);
+        // the row num of excel is begin with 0
+        int rowcount=sheet.getLastRowNum()-sheet.getFirstRowNum();
+        List<Object[]>records=new ArrayList<Object[]>();
+        for (int i=0;i<rowcount+1;i++){
+            Row row=sheet.getRow(i);
+            String fields[]=new String[row.getLastCellNum()]; //getlastcellnum  get the one-D array size
+            for (int j=0;j<row.getLastCellNum();j++){
+                fields[j]=row.getCell(j).getStringCellValue();
+            }
+
+           records.add(fields);
+        }
+
         Object[][]result=new Object[records.size()][];
         for (int i=0;i<records.size();i++){
             result[i]=records.get(i);
         }
         return result;
-
     }
 
 }
-

@@ -1,3 +1,5 @@
+package testcase;
+
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -12,7 +14,7 @@ public class testngdatadriver {
     public static Object[][] words(){
         return new Object[][]{{"蝙蝠侠","主演","迈克尔"},{"超人","导演","唐纳"},{"生化危机","编剧","安德森"}};
     }
-    @Test(dataProvider = "keywords")
+    @Test(dataProvider = "keywords",groups = {"test1"})
     public void test(String keyword1,String keyword2,String result){
         driver=new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
