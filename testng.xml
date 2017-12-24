@@ -1,0 +1,12 @@
+<suite name="suite">
+        <test name="testcase">
+            <groups>
+                <run>
+                    <include name="test1"/>
+                </run>
+            </groups>
+            <classes>
+                <class name="testcase.testngdatadriver"/>
+            </classes>
+        </test>
+</suite>
