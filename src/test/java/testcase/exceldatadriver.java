@@ -37,8 +37,8 @@ public class exceldatadriver {
     }
     @DataProvider(name = "testdata")
     public static Object[][]testdata()throws IOException{
-        //return gettestdata("//Users//yu//Documents//maven01","xlsxtestdata.xlsx","工作表1");
-        return gettestdata("../../../../src/test/testdata","xlsxtestdata.xlsx","工作表1");
+        return gettestdata("//Users//yu//Documents//maven01","xlsxtestdata.xlsx","工作表1");
+
     }
     @Test(dataProvider = "testdata")
     public void test(String keyword1,String keyword2,String result){
