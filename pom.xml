@@ -369,7 +369,7 @@
             <artifactId>selenium-server</artifactId>
             <version>2.53.1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/jars/selenium-2.53.1/selenium-server-2.53.1.jar</systemPath>
+            <systemPath>${basedir}/jars/selenium-2.53.1/selenium-server-2.53.1.jar</systemPath>
         </dependency>
 
     </dependencies>
