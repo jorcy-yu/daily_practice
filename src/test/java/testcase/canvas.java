@@ -12,6 +12,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+
 public class canvas {
     WebDriver driver;
     String url="http://www.w3school.com.cn/tiy/loadtext.asp?f=html5_canvas_line";

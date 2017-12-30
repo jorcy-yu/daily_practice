@@ -16,7 +16,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -118,5 +118,14 @@
     <orderEntry type="library" name="Maven: com.codeborne:phantomjsdriver:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.15" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium.core:selenium-core:1.0" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: org.seleniumhq.selenium:selenium-server:2.53.1">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/jars/selenium-2.53.1/selenium-server-2.53.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
