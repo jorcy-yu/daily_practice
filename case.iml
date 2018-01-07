@@ -121,7 +121,7 @@
     <orderEntry type="module-library">
       <library name="Maven: org.seleniumhq.selenium:selenium-server:2.53.1">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/jars/selenium-2.53.1/selenium-server-2.53.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/jars/selenium-2.53.1/selenium-server-standalone-2.53.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
